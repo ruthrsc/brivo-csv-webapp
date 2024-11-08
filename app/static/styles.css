@@ -1,0 +1,20 @@
+/*
+ * Custom CSS
+ */
+
+:root {
+  --bs-body-bg: var(--bs-gray-100);
+}
+
+.callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-left: .25rem solid #e9ecef;
+  border-left-color: rgb(233, 236, 239);
+  border-radius: .25rem;
+}
+
+.callout-info {
+  border-left-color: #17a2b8;
+}

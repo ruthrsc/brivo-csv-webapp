@@ -1,0 +1,8 @@
+**/__pycache__
+*.swp
+.pytest_cache/
+htmlcov/
+.coverage
+*.py[cod]
+venv/
+

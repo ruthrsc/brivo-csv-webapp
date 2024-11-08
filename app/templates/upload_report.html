@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="mb-0">Upload report</h5>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>
+                    Total records: {{record_count}}.
+                </li>
+                <li>
+                    Failed records: {{errors|length}}.
+                </li>
+                {% if errors|length > 100 %}
+                <li>
+                    - Processing stopped after encountering 100 errors.
+                    <ul>
+                        <li>
+                            - Check CSV format.
+                        </li>
+                        <li>
+                            - <a href="/test_api">Click here to perform api test to verify
+                                infrastructure</a>.
+                        </li>
+                        <li>
+                            - Try smaller batches (~25 records)
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+            {% if errors|length > 0 %}
+            <h4>First few errors</h4>
+            <ul>
+                {% for error in errors[:5] %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <ul>
+                <li><a href="/download_result" class="btn btn-primary btn-sm" role="button">Download Full CSV
+                        with
+                        data and Errors</a><br /><small>Can be
+                        used for partial retry</small></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

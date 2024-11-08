@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="mb-0">Upload CSV FILE</h5>
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <form method="POST" action="/upload" enctype="multipart/form-data">
+                    <div class="alert alert-info" role="alert">
+                        Remember to include the column headers in the CSV file.
+                    </div>
+                    <div style="display: flex; gap: 2rem;">
+                        <div class="mb-3">
+                            <label for="upload_type" class="form-label">Choose upload type</label>
+                            <select class="form-select" id="upload_type" name="upload_type" required>
+                                <option value="create" selected>Create Users</option>
+                                <option value="suspend">Suspend/Restore access</option>
+                                <option value="update" disabled>Update Users - TBD</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Choose CSV File to upload</label>
+                            <input type="file" class="form-control" id="file" name="file" required accept=".csv,">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+            <div>
+                <H5>Example Format</H5>
+
+                {% include "create_hint.html" %}
+                {% include "susres_hint.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#upload_type").change(function () {
+            if ($("#upload_type").val() == "create") {
+                $("#susres-hint").hide();
+                $("#create-hint").show()
+                $("#create-hint th, #create-hint td").effect("highlight")
+            } else if ($("#upload_type").val() == "suspend") {
+                $("#create-hint").hide();
+                $("#susres-hint").show();
+                $("#susres-hint th, #susres-hint td").effect("highlight")
+            }
+        })
+    })
+</script>
+
+{% endblock %}
